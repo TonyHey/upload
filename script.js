@@ -158,7 +158,7 @@ function uploadFinish(e) { // upload successfully finished
 
     document.getElementById('progress_percent').innerHTML = '100%';
     document.getElementById('progress').style.width = '400px';
-    document.getElementById('filesize').innerHTML = 'size:' + ResultFileSize;
+    document.getElementById('filesize').innerHTML = 'size:' + sResultFileSize;
     document.getElementById('remaining').innerHTML = '| 00:00:00';
 
     clearInterval(oTimer);
