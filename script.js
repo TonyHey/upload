@@ -86,24 +86,29 @@ function startUploading() {
     document.getElementById('warnsize').style.display = 'none';
     document.getElementById('progress_percent').innerHTML = '';
     var oProgress = document.getElementById('progress');
-    oProgress.style.display = 'block';
-    oProgress.style.width = '0px';
 
     // get form data for POSTing
     //var vFD = document.getElementById('upload_form').getFormData(); // for FF3
     var vFD = new FormData(document.getElementById('upload_form'));
 
-    // create XMLHttpRequest object, adding few event listeners, and POSTing our data
-    var oXHR = new XMLHttpRequest();
-    oXHR.upload.addEventListener('progress', uploadProgress, false);
-    oXHR.addEventListener('load', uploadFinish, false);
-    oXHR.addEventListener('error', uploadError, false);
-    oXHR.addEventListener('abort', uploadAbort, false);
-    oXHR.open('POST', 'upload.php');
-    oXHR.send(vFD);
+    if (vFD.get("image_file").size) {
+        // create XMLHttpRequest object, adding few event listeners, and POSTing our data
+        var oXHR = new XMLHttpRequest();
+        oXHR.upload.addEventListener('progress', uploadProgress, false);
+        oXHR.addEventListener('load', uploadFinish, false);
+        oXHR.addEventListener('error', uploadError, false);
+        oXHR.addEventListener('abort', uploadAbort, false);
+        oXHR.open('POST', 'upload.php');
+        oXHR.send(vFD);
 
-    // set inner timer
-    oTimer = setInterval(doInnerUpdates, 300);
+        oProgress.style.display = 'block';
+        oProgress.style.width = '0px';
+
+        // set inner timer
+        oTimer = setInterval(doInnerUpdates, 300);
+    } else {
+        alert("please choese a img file!");
+    }
 }
 
 function doInnerUpdates() { // we will use this function to display upload speed
