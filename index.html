@@ -2,7 +2,7 @@
 <html lang="en" >
     <head>
         <meta charset="utf-8" />
-        <title>Test</title>
+        <title>Upload Test</title>
         <link href="main.css" rel="stylesheet" type="text/css" />
         <script src="script.js"></script>
     </head>
@@ -16,8 +16,11 @@
             <div class="upload_form_cont">
                 <form id="upload_form" enctype="multipart/form-data" method="post" action="upload.php">
                     <div>
-                        <div><label for="image_file">Please select image file</label></div>
-                        <div><input type="file" name="image_file" id="image_file" onchange="fileSelected();" /></div>
+                        <div id="upload_warm"><label for="image_file">Please select image file</label></div>
+                        <div class="input_wraper">
+                            <div id="file_btn">Choose File</div>
+                            <input type="file" name="image_file" id="image_file" onchange="fileSelected();" />
+                        </div>
                     </div>
                     <div>
                         <input type="button" value="Upload" onclick="startUploading()" />
