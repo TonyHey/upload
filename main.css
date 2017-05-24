@@ -84,14 +84,21 @@ header .stuts span {
     width: 160px;
     overflow: hidden;
     position: relative;
+    display: inline-block;
 }
 
 #file_btn {
     max-width: 160px;
-    -webkit-border-radius: 10px;
+    max-height: 22px;
     border: 1px solid #ccc;
     font-size: 14pt;
+    text-align: center;
     padding: 5px 10px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
 }
 
 #image_file {
@@ -100,6 +107,13 @@ header .stuts span {
     left: 0;
     top: 0;
     opacity: 0;
+    padding: 2px 0;
+}
+
+.upload_btn {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 4px;
 }
 
 #preview {
