@@ -107,7 +107,7 @@ function startUploading() {
         oProgress.style.width = "0px";
 
         // set inner timer
-        oTimer = setInterval(doInnerUpdates, 500);
+        // oTimer = setInterval(doInnerUpdates, 500);
     } else {
         alert("please choese a img file!");
     }
@@ -148,6 +148,7 @@ function uploadProgress(e) { // upload process in progress
         document.getElementById("progress_percent").innerHTML = iPercentComplete.toString() + "%";
         document.getElementById("progress").style.width = (iPercentComplete * 4).toString() + "px";
         document.getElementById("b_transfered").innerHTML = iBytesTransfered;
+        doInnerUpdates();
         if (iPercentComplete == 100) {
             var oUploadResponse = document.getElementById("upload_response");
             oUploadResponse.innerHTML = "<h1>Please wait...processing</h1>";
@@ -169,15 +170,15 @@ function uploadFinish(e) { // upload successfully finished
     document.getElementById("remaining").innerHTML = "";
     document.getElementById("speed").innerHTML = "";
 
-    clearInterval(oTimer);
+    // clearInterval(oTimer);
 }
 
 function uploadError(e) { // upload error
     document.getElementById("error2").style.display = "block";
-    clearInterval(oTimer);
+    // clearInterval(oTimer);
 }
 
 function uploadAbort(e) { // upload abort
     document.getElementById("abort").style.display = "block";
-    clearInterval(oTimer);
+    // clearInterval(oTimer);
 }
