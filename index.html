@@ -2,6 +2,7 @@
 <html lang="en" >
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
         <title>Upload Test</title>
         <link href="main.css" rel="stylesheet" type="text/css" />
         <script src="script.js"></script>
@@ -48,8 +49,9 @@
                     <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
                     <div id="warnsize">Your file is very big. We can't accept it. Please select more small file</div>
                 </form>
-
-                <img id="preview" />
+                <div id="preview_wrapper">
+                    <img id="preview" />
+                </div>
             </div>
         </div>
     </body>

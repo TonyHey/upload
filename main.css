@@ -19,11 +19,7 @@ header {
 header h2{
     font-size:22px;
     font-weight:normal;
-    left:50%;
-    margin-left:-400px;
-    padding:22px 0;
-    position:absolute;
-    width:540px;
+    padding:22px;
 }
 header a.stuts,a.stuts:visited{
     border:none;
@@ -43,12 +39,12 @@ header .stuts span {
 }
 .container {
     overflow:hidden;
-    width:960px;
+    width:92%;
     margin:20px auto;
 }
 .contr {
     background-color:#212121;
-    padding:10px 0;
+    padding:10px;
     text-align:center;
 
     border-radius:10px 10px 0 0;
@@ -68,14 +64,23 @@ header .stuts span {
 
     color:#000;
     overflow:hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
-
 #upload_form {
-    float:left;
-    padding:20px;
-    width:700px;
+    padding: 10px 20px;
 }
-
+#preview_wrapper {
+    display: none;
+    margin-bottom:10px;
+    max-width:300px;
+}
+#preview {
+    background-color:#fff;
+    display:block;
+    width:100%;
+}
 #upload_warm {
     margin: 12px 0;
     font-size: 24px;
@@ -114,13 +119,6 @@ header .stuts span {
     display: inline-block;
     vertical-align: top;
     margin-left: 4px;
-}
-
-#preview {
-    background-color:#fff;
-    display:block;
-    float:right;
-    width:200px;
 }
 #upload_form > div {
     margin-bottom:10px;

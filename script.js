@@ -58,8 +58,8 @@ function fileSelected() {
     oReader.onload = function(e){
 
         // e.target.result contains the DataURL which we will use as a source of the image
+        oImage.parentNode.style.display = "block";
         oImage.src = e.target.result;
-
         oImage.onload = function () { // binding onload event
 
             // we are going to display some custom image information here
@@ -142,7 +142,7 @@ function uploadProgress(e) { // upload process in progress
         var iBytesTransfered = bytesToSize(iBytesUploaded);
 
         document.getElementById("progress_percent").innerHTML = iPercentComplete.toString() + "%";
-        document.getElementById("progress").style.width = (iPercentComplete * 4).toString() + "px";
+        document.getElementById("progress").style.width = (iPercentComplete * 3).toString() + "px";
         document.getElementById("b_transfered").innerHTML = iBytesTransfered;
         doInnerUpdates();
         if (iPercentComplete === 100) {
@@ -169,8 +169,10 @@ function uploadFinish(e) { // upload successfully finished
 
 function uploadError(e) { // upload error
     document.getElementById("error2").style.display = "block";
+    document.getElementById("progress_info").style.display = "none";
 }
 
 function uploadAbort(e) { // upload abort
     document.getElementById("abort").style.display = "block";
+    document.getElementById("progress_info").style.display = "none";
 }
