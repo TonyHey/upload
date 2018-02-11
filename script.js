@@ -4,7 +4,7 @@ var iBytesTotal = 0;
 var iPreviousBytesLoaded = 0;
 var iMaxFilesize = 10485760; // 10MB
 var oTimer = 0;
-var sResultFileSize = '';
+var sResultFileSize = "";
 
 function secondsToTime(secs) { // we will use this function to convert seconds in normal time format
     var hr = Math.floor(secs / 3600);
@@ -15,44 +15,44 @@ function secondsToTime(secs) { // we will use this function to convert seconds i
     if (min < 10) {min = "0" + min;}
     if (sec < 10) {sec = "0" + sec;}
     if (hr) {hr = "00";}
-    return hr + ':' + min + ':' + sec;
+    return hr + ":" + min + ":" + sec;
 };
 
 function bytesToSize(bytes) {
-    var sizes = ['Bytes', 'KB', 'MB'];
-    if (bytes == 0) return 'n/a';
+    var sizes = ["Bytes", "KB", "MB"];
+    if (bytes == 0) return "n/a";
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-    return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+    return (bytes / Math.pow(1024, i)).toFixed(1) + " " + sizes[i];
 };
 
 function fileSelected() {
 
     // hide different warnings
-    document.getElementById('upload_response').style.display = 'none';
-    document.getElementById('error').style.display = 'none';
-    document.getElementById('error2').style.display = 'none';
-    document.getElementById('abort').style.display = 'none';
-    document.getElementById('warnsize').style.display = 'none';
-    document.getElementById('progress_info').style.display = 'none';
+    document.getElementById("upload_response").style.display = "none";
+    document.getElementById("error").style.display = "none";
+    document.getElementById("error2").style.display = "none";
+    document.getElementById("abort").style.display = "none";
+    document.getElementById("warnsize").style.display = "none";
+    document.getElementById("progress_info").style.display = "none";
 
     // get selected file element
-    var oFile = document.getElementById('image_file').files[0];
+    var oFile = document.getElementById("image_file").files[0];
 
     // filter for image files
     var rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
     if (! rFilter.test(oFile.type)) {
-        document.getElementById('error').style.display = 'block';
+        document.getElementById("error").style.display = "block";
         return;
     }
 
     // little test for filesize
     if (oFile.size > iMaxFilesize) {
-        document.getElementById('warnsize').style.display = 'block';
+        document.getElementById("warnsize").style.display = "block";
         return;
     }
 
     // get preview element
-    var oImage = document.getElementById('preview');
+    var oImage = document.getElementById("preview");
 
     // prepare HTML5 FileReader
     var oReader = new FileReader();
@@ -65,11 +65,11 @@ function fileSelected() {
 
             // we are going to display some custom image information here
             sResultFileSize = bytesToSize(oFile.size);
-            document.getElementById('fileinfo').style.display = 'block';
-            document.getElementById('filename').innerHTML = 'name:' + oFile.name;
-            document.getElementById('filesize').innerHTML = 'size:' + sResultFileSize;
-            document.getElementById('filetype').innerHTML = 'type:' + oFile.type;
-            document.getElementById('filedim').innerHTML = 'dimension:' + oImage.height +"X"+ oImage.width;
+            document.getElementById("fileinfo").style.display = "block";
+            document.getElementById("filename").innerHTML = "name:" + oFile.name;
+            document.getElementById("filesize").innerHTML = "size:" + sResultFileSize;
+            document.getElementById("filetype").innerHTML = "type:" + oFile.type;
+            document.getElementById("filedim").innerHTML = "dimension:" + oImage.height +"X"+ oImage.width;
         };
     };
 
@@ -80,34 +80,34 @@ function fileSelected() {
 function startUploading() {
     // cleanup all temp states
     iPreviousBytesLoaded = 0;
-    document.getElementById('upload_response').style.display = 'none';
-    document.getElementById('error').style.display = 'none';
-    document.getElementById('error2').style.display = 'none';
-    document.getElementById('abort').style.display = 'none';
-    document.getElementById('warnsize').style.display = 'none';
-    document.getElementById('progress_info').style.display = 'block';
-    document.getElementById('progress_percent').innerHTML = '';
-    var oProgress = document.getElementById('progress');
+    document.getElementById("upload_response").style.display = "none";
+    document.getElementById("error").style.display = "none";
+    document.getElementById("error2").style.display = "none";
+    document.getElementById("abort").style.display = "none";
+    document.getElementById("warnsize").style.display = "none";
+    document.getElementById("progress_info").style.display = "block";
+    document.getElementById("progress_percent").innerHTML = "";
+    var oProgress = document.getElementById("progress");
 
     // get form data for POSTing
-    //var vFD = document.getElementById('upload_form').getFormData(); // for FF3
-    var vFD = new FormData(document.getElementById('upload_form'));
+    //var vFD = document.getElementById("upload_form").getFormData(); // for FF3
+    var vFD = new FormData(document.getElementById("upload_form"));
 
     if (vFD.get("image_file").size) {
         // create XMLHttpRequest object, adding few event listeners, and POSTing our data
         var oXHR = new XMLHttpRequest();
-        oXHR.upload.addEventListener('progress', uploadProgress, false);
-        oXHR.addEventListener('load', uploadFinish, false);
-        oXHR.addEventListener('error', uploadError, false);
-        oXHR.addEventListener('abort', uploadAbort, false);
-        oXHR.open('POST', 'upload.php');
+        oXHR.upload.addEventListener("progress", uploadProgress);
+        oXHR.addEventListener("load", uploadFinish);
+        oXHR.addEventListener("error", uploadError);
+        oXHR.addEventListener("abort", uploadAbort);
+        oXHR.open("POST", "upload.php");
         oXHR.send(vFD);
 
-        oProgress.style.display = 'block';
-        oProgress.style.width = '0px';
+        oProgress.style.display = "block";
+        oProgress.style.width = "0px";
 
         // set inner timer
-        oTimer = setInterval(doInnerUpdates, 300);
+        oTimer = setInterval(doInnerUpdates, 500);
     } else {
         alert("please choese a img file!");
     }
@@ -127,15 +127,15 @@ function doInnerUpdates() { // we will use this function to display upload speed
     var secondsRemaining = iBytesRem / iDiff;
 
     // update speed info
-    var iSpeed = iDiff.toString() + 'B/s';
+    var iSpeed = iDiff.toString() + "B/s";
     if (iDiff > 1024 * 1024) {
-        iSpeed = (Math.round(iDiff * 100/(1024*1024))/100).toString() + 'MB/s';
+        iSpeed = (Math.round(iDiff * 100/(1024*1024))/100).toString() + "MB/s";
     } else if (iDiff > 1024) {
-        iSpeed =  (Math.round(iDiff * 100/1024)/100).toString() + 'KB/s';
+        iSpeed =  (Math.round(iDiff * 100/1024)/100).toString() + "KB/s";
     }
 
-    document.getElementById('speed').innerHTML = iSpeed;
-    document.getElementById('remaining').innerHTML = '| ' + secondsToTime(secondsRemaining);        
+    document.getElementById("remaining").innerHTML = secondsToTime(secondsRemaining) + "|";
+    document.getElementById("speed").innerHTML = iSpeed;
 }
 
 function uploadProgress(e) { // upload process in progress
@@ -145,38 +145,39 @@ function uploadProgress(e) { // upload process in progress
         var iPercentComplete = Math.round(e.loaded * 100 / e.total);
         var iBytesTransfered = bytesToSize(iBytesUploaded);
 
-        document.getElementById('progress_percent').innerHTML = iPercentComplete.toString() + '%';
-        document.getElementById('progress').style.width = (iPercentComplete * 4).toString() + 'px';
-        document.getElementById('b_transfered').innerHTML = iBytesTransfered;
+        document.getElementById("progress_percent").innerHTML = iPercentComplete.toString() + "%";
+        document.getElementById("progress").style.width = (iPercentComplete * 4).toString() + "px";
+        document.getElementById("b_transfered").innerHTML = iBytesTransfered;
         if (iPercentComplete == 100) {
-            var oUploadResponse = document.getElementById('upload_response');
-            oUploadResponse.innerHTML = '<h1>Please wait...processing</h1>';
-            oUploadResponse.style.display = 'block';
+            var oUploadResponse = document.getElementById("upload_response");
+            oUploadResponse.innerHTML = "<h1>Please wait...processing</h1>";
+            oUploadResponse.style.display = "block";
         }
     } else {
-        document.getElementById('progress').innerHTML = 'unable to compute';
+        document.getElementById("progress").innerHTML = "unable to compute";
     }
 }
 
 function uploadFinish(e) { // upload successfully finished
-    var oUploadResponse = document.getElementById('upload_response');
+    var oUploadResponse = document.getElementById("upload_response");
     oUploadResponse.innerHTML = e.target.responseText;
-    oUploadResponse.style.display = 'block';
+    oUploadResponse.style.display = "block";
 
-    document.getElementById('progress_percent').innerHTML = '100%';
-    document.getElementById('progress').style.width = '400px';
-    document.getElementById('filesize').innerHTML = 'size:' + sResultFileSize;
-    document.getElementById('remaining').innerHTML = '| 00:00:00';
+    document.getElementById("progress_percent").innerHTML = "100%";
+    document.getElementById("progress").style.width = "400px";
+    document.getElementById("filesize").innerHTML = "size:" + sResultFileSize;
+    document.getElementById("remaining").innerHTML = "";
+    document.getElementById("speed").innerHTML = "";
 
     clearInterval(oTimer);
 }
 
 function uploadError(e) { // upload error
-    document.getElementById('error2').style.display = 'block';
+    document.getElementById("error2").style.display = "block";
     clearInterval(oTimer);
-}  
+}
 
 function uploadAbort(e) { // upload abort
-    document.getElementById('abort').style.display = 'block';
+    document.getElementById("abort").style.display = "block";
     clearInterval(oTimer);
 }
