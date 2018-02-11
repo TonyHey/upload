@@ -3,7 +3,6 @@ var iBytesUploaded = 0;
 var iBytesTotal = 0;
 var iPreviousBytesLoaded = 0;
 var iMaxFilesize = 10485760; // 10MB
-var oTimer = 0;
 var sResultFileSize = "";
 
 function secondsToTime(secs) { // we will use this function to convert seconds in normal time format
@@ -20,7 +19,7 @@ function secondsToTime(secs) { // we will use this function to convert seconds i
 
 function bytesToSize(bytes) {
     var sizes = ["Bytes", "KB", "MB"];
-    if (bytes == 0) return "n/a";
+    if (bytes === 0) return "n/a";
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return (bytes / Math.pow(1024, i)).toFixed(1) + " " + sizes[i];
 };
@@ -105,9 +104,6 @@ function startUploading() {
 
         oProgress.style.display = "block";
         oProgress.style.width = "0px";
-
-        // set inner timer
-        // oTimer = setInterval(doInnerUpdates, 500);
     } else {
         alert("please choese a img file!");
     }
@@ -118,7 +114,7 @@ function doInnerUpdates() { // we will use this function to display upload speed
     var iDiff = iCB - iPreviousBytesLoaded;
 
     // if nothing new loaded - exit
-    if (iDiff == 0)
+    if (iDiff === 0)
         return;
 
     iPreviousBytesLoaded = iCB;
@@ -149,7 +145,7 @@ function uploadProgress(e) { // upload process in progress
         document.getElementById("progress").style.width = (iPercentComplete * 4).toString() + "px";
         document.getElementById("b_transfered").innerHTML = iBytesTransfered;
         doInnerUpdates();
-        if (iPercentComplete == 100) {
+        if (iPercentComplete === 100) {
             var oUploadResponse = document.getElementById("upload_response");
             oUploadResponse.innerHTML = "<h1>Please wait...processing</h1>";
             oUploadResponse.style.display = "block";
@@ -169,16 +165,12 @@ function uploadFinish(e) { // upload successfully finished
     document.getElementById("filesize").innerHTML = "size:" + sResultFileSize;
     document.getElementById("remaining").innerHTML = "";
     document.getElementById("speed").innerHTML = "";
-
-    // clearInterval(oTimer);
 }
 
 function uploadError(e) { // upload error
     document.getElementById("error2").style.display = "block";
-    // clearInterval(oTimer);
 }
 
 function uploadAbort(e) { // upload abort
     document.getElementById("abort").style.display = "block";
-    // clearInterval(oTimer);
 }
