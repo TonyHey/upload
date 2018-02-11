@@ -142,7 +142,7 @@ function uploadProgress(e) { // upload process in progress
         var iBytesTransfered = bytesToSize(iBytesUploaded);
 
         document.getElementById("progress_percent").innerHTML = iPercentComplete.toString() + "%";
-        document.getElementById("progress").style.width = (iPercentComplete * 3).toString() + "px";
+        document.getElementById("progress").style.width = (iPercentComplete * 2).toString() + "px";
         document.getElementById("b_transfered").innerHTML = iBytesTransfered;
         doInnerUpdates();
         if (iPercentComplete === 100) {
@@ -161,7 +161,7 @@ function uploadFinish(e) { // upload successfully finished
     oUploadResponse.style.display = "block";
 
     document.getElementById("progress_percent").innerHTML = "100%";
-    document.getElementById("progress").style.width = "400px";
+    document.getElementById("progress").style.width = "200px";
     document.getElementById("filesize").innerHTML = "size:" + sResultFileSize;
     document.getElementById("remaining").innerHTML = "";
     document.getElementById("speed").innerHTML = "";
