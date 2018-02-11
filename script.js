@@ -33,6 +33,7 @@ function fileSelected() {
     document.getElementById('error2').style.display = 'none';
     document.getElementById('abort').style.display = 'none';
     document.getElementById('warnsize').style.display = 'none';
+    document.getElementById('progress_info').style.display = 'none';
 
     // get selected file element
     var oFile = document.getElementById('image_file').files[0];
@@ -84,6 +85,7 @@ function startUploading() {
     document.getElementById('error2').style.display = 'none';
     document.getElementById('abort').style.display = 'none';
     document.getElementById('warnsize').style.display = 'none';
+    document.getElementById('progress_info').style.display = 'block';
     document.getElementById('progress_percent').innerHTML = '';
     var oProgress = document.getElementById('progress');
 
