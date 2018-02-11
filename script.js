@@ -130,7 +130,7 @@ function doInnerUpdates() { // we will use this function to display upload speed
         iSpeed =  (Math.round(iDiff * 100/1024)/100).toString() + "KB/s";
     }
 
-    document.getElementById("remaining").innerHTML = secondsToTime(secondsRemaining) + "|";
+    document.getElementById("remaining").innerHTML = secondsToTime(secondsRemaining) + " | ";
     document.getElementById("speed").innerHTML = iSpeed;
 }
 
@@ -163,7 +163,7 @@ function uploadFinish(e) { // upload successfully finished
     document.getElementById("progress_percent").innerHTML = "100%";
     document.getElementById("progress").style.width = "250px";
     document.getElementById("filesize").innerHTML = "size:" + sResultFileSize;
-    document.getElementById("remaining").innerHTML = "";
+    document.getElementById("remaining").innerHTML = "Transfer Completed";
     document.getElementById("speed").innerHTML = "";
 }
 

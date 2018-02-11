@@ -126,7 +126,6 @@ header .stuts span {
 }
 #speed,#remaining {
     float:left;
-    width:100px;
 }
 #b_transfered {
     float:right;
