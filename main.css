@@ -20,6 +20,7 @@ header h2{
     font-size:22px;
     font-weight:normal;
     padding:22px;
+    text-align: center;
 }
 header a.stuts,a.stuts:visited{
     border:none;
@@ -39,8 +40,9 @@ header .stuts span {
 }
 .container {
     overflow:hidden;
-    width:92%;
+    max-width:650px;
     margin:20px auto;
+    padding: 0 10px;
 }
 .contr {
     background-color:#212121;

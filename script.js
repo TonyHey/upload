@@ -130,7 +130,7 @@ function doInnerUpdates() { // we will use this function to display upload speed
         iSpeed =  (Math.round(iDiff * 100/1024)/100).toString() + "KB/s";
     }
 
-    document.getElementById("remaining").innerHTML = secondsToTime(secondsRemaining) + " | ";
+    document.getElementById("remaining").innerHTML = secondsToTime(secondsRemaining) + "&nbsp;|&nbsp;";
     document.getElementById("speed").innerHTML = iSpeed;
 }
 
