@@ -99,7 +99,7 @@ function startUploading() {
         oXHR.addEventListener("load", uploadFinish);
         oXHR.addEventListener("error", uploadError);
         oXHR.addEventListener("abort", uploadAbort);
-        oXHR.open("POST", "upload.php");
+        oXHR.open("POST", "https://api.freedomlove.me/upload");
         oXHR.send(vFD);
 
         oProgress.style.display = "block";
@@ -147,7 +147,7 @@ function uploadProgress(e) { // upload process in progress
         doInnerUpdates();
         if (iPercentComplete === 100) {
             var oUploadResponse = document.getElementById("upload_response");
-            oUploadResponse.innerHTML = "<h1>Please wait...processing</h1>";
+            oUploadResponse.innerHTML = "Processing, please wait...";
             oUploadResponse.style.display = "block";
         }
     } else {
