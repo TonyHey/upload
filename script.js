@@ -39,10 +39,10 @@ function fileSelected() {
 
     // filter for image files
     var rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
-    if (! rFilter.test(oFile.type)) {
-        document.getElementById("error").style.display = "block";
-        return;
-    }
+    // if (!rFilter.test(oFile.type)) {
+    //     document.getElementById("error").style.display = "block";
+    //     return;
+    // }
 
     // little test for filesize
     if (oFile.size > iMaxFilesize) {
@@ -50,26 +50,29 @@ function fileSelected() {
         return;
     }
 
-    // get preview element
-    var oImage = document.getElementById("preview");
-
     // prepare HTML5 FileReader
     var oReader = new FileReader();
     oReader.onload = function(e){
+        // we are going to display some custom image information here
+        sResultFileSize = bytesToSize(oFile.size);
+        document.getElementById("fileinfo").style.display = "block";
+        document.getElementById("filename").innerHTML = "name: " + oFile.name;
+        document.getElementById("filesize").innerHTML = "size: " + sResultFileSize;
+        document.getElementById("filetype").innerHTML = "type: " + oFile.type;
+        
+        if (rFilter.test(oFile.type)) {
+            // get preview element
+            var oImage = document.getElementById("preview");
 
-        // e.target.result contains the DataURL which we will use as a source of the image
-        oImage.parentNode.style.display = "block";
-        oImage.src = e.target.result;
-        oImage.onload = function () { // binding onload event
-
-            // we are going to display some custom image information here
-            sResultFileSize = bytesToSize(oFile.size);
-            document.getElementById("fileinfo").style.display = "block";
-            document.getElementById("filename").innerHTML = "name:" + oFile.name;
-            document.getElementById("filesize").innerHTML = "size:" + sResultFileSize;
-            document.getElementById("filetype").innerHTML = "type:" + oFile.type;
-            document.getElementById("filedim").innerHTML = "dimension:" + oImage.height +"X"+ oImage.width;
-        };
+            // e.target.result contains the DataURL which we will use as a source of the image
+            oImage.parentNode.style.display = "block";
+            oImage.src = e.target.result;
+            oImage.onload = function () { // binding onload event
+                var imgWidth = oImage.naturalWidth || oImage.width
+                var imgHeight = oImage.naturalHeight || oImage.height
+                document.getElementById("filedim").innerHTML = "dimension: " + imgWidth + "X" + imgHeight;
+            };
+        }
     };
 
     // read selected file as DataURL
